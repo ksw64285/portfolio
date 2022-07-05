@@ -20,8 +20,14 @@ navbarMenu.addEventListener('click', (event) => {
   if (link == null) {
     return;
   }
-
+  navbarMenu.classList.remove('open');
   scrollIntoView(link);
+});
+
+// Navbar toggle button for small screen
+const navbarToggleBtn = document.querySelector('.navbar__toggle-btn');
+navbarToggleBtn.addEventListener('click', () => {
+  navbarMenu.classList.toggle('open');
 });
 
 // Handle click on "contact me" button on home
@@ -61,8 +67,15 @@ workBtnContainer.addEventListener('click', (e) => {
   if (filter == null) {
     return;
   }
-  projectContainer.classList.add('anim-out');
 
+  // Remove selection from the previous item and select the new one
+  const active = document.querySelector('.category__btn.selected');
+  if (active != null) {
+    active.classList.remove('selected');
+  }
+  e.target.classList.add('selected');
+
+  projectContainer.classList.add('anim-out');
   setTimeout(() => {
     projects.forEach((project) => {
       console.log(project.dataset.type);
